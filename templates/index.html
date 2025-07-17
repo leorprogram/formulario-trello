@@ -3,28 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulário de Solicitação</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f4f8;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .form-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Formulário de Solicitação</h1>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-            {% for category, message in messages %}
-                <li><strong>{{ category }}:</strong> {{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    <form method="POST">
-        <label>Nome:</label><br>
-        <input type="text" name="nome" required><br><br>
-        <label>WhatsApp:</label><br>
-        <input type="text" name="whatsapp" required><br><br>
-        <label>Solicitação Requerida:</label><br>
-        <textarea name="solicitacao" required></textarea><br><br>
-        <label>Anotações:</label><br>
-        <textarea name="anotacoes"></textarea><br><br>
-        <button type="submit">Enviar</button>
-    </form>
+
+    <div class="container">
+        <div class="form-card">
+            <h2 class="mb-4 text-center">📋 Solicitação de Suporte</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mb-3">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' if category == 'success' else 'warning' }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="whatsapp" class="form-label">WhatsApp</label>
+                    <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="(xx) xxxxx-xxxx" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="solicitacao" class="form-label">Solicitação Requerida</label>
+                    <textarea class="form-control" id="solicitacao" name="solicitacao" rows="4" placeholder="Descreva o problema ou solicitação..." required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="anotacoes" class="form-label">Anotações</label>
+                    <textarea class="form-control" id="anotacoes" name="anotacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-custom">📨 Enviar Solicitação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
