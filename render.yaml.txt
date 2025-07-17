@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: formulario-trello
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    envVars:
+      - key: MAIL_USERNAME
+        value: leorsuporte@gmail.com
+      - key: MAIL_PASSWORD
+        value: Ld569647$
